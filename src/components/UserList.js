@@ -7,6 +7,7 @@ import ModalView from './UI/ModalView'
 
 const UserList = (props) =>{
     const [isOpen, setIsOpen] = useState(false);
+    const [open, setOpen] = useState(false);
 
     return(
         <>
@@ -30,15 +31,18 @@ const UserList = (props) =>{
                         <td>{user.email}</td>
                         <td>{user.phone}</td>
                         <td><Button className="btn btn-success" onClick={() => setIsOpen(true)}>Actualizar</Button></td>
-                        <td><Button className="btn btn-info" onClick={() => setIsOpen(true)}>Ver</Button></td>
+                        <td><Button className="btn btn-info" onClick={() => setOpen(true)}>Ver</Button></td>
                         <td><Button className="btn btn-danger" onClick={() => props.handleDeleteTableRows(index)}>X</Button></td>
                     </tr>)
                 })
             }
             </tbody>
         </Table>
-        {isOpen && <ModalView setIsOpen={setIsOpen} users={props.users}/>}
+        
+        
         {isOpen && <ModalUpdate setIsOpen={setIsOpen} />}
+        {open && <ModalView setIsOpen={setOpen} />}
+        
         </>
     )
 }

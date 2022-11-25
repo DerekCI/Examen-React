@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./Modal.module.css";
-const ModalView = ({ setIsOpen, ...props}) => {
+const ModalView = ({ setIsOpen}) => {
   return (
     <>
       <div className={styles.darkBG} onClick={() => setIsOpen(false)} />
@@ -14,9 +14,9 @@ const ModalView = ({ setIsOpen, ...props}) => {
           </button>
           <div className={styles.modalContent}>
             <div>
-                <p>Nombre: {props.users.name} </p>
-                <p>Correo: {props.users.email} </p>
-                <p>Telefono: {props.users.phone} </p>
+                <p>Nombre:  </p>
+                <p>Correo:  </p>
+                <p>Telefono: </p>
       
             </div>
           </div>
