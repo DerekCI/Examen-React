@@ -1,49 +1,72 @@
-import React, {useState} from "react";
-import Table from 'react-bootstrap/Table';
+import React, { useState} from "react";
+import Table from "react-bootstrap/Table";
+import ModalUpdate from "./UI/ModalUpdate";
+import ModalView from "./UI/ModalView";
 
-import Button from "react-bootstrap/Button";
-import ModalUpdate from './UI/ModalUpdate'
-import ModalView from './UI/ModalView'
+const ItemList = (props) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
-const ItemList = (props) =>{
-    const [isOpen, setIsOpen] = useState(false);
-    const [open, setOpen] = useState(false);
+  const [items, setItems] = useState([]);
 
-    return(
-        <>
-        
-        <Table>
-            <thead>
-                <tr>
-                    <th className="text-primary">Nombre</th>
-                    <th>Descripcion</th>
-                    <th>Cantidad</th>
-                </tr>
-            </thead>
-            <tbody>
-            {
-                props.users.map((user, index) => {
-                    return (<tr key={index}>
-                        <td>{user.name}</td>
-                        <td>{user.email}</td>
-                        <td>{user.phone}</td>
-                        <td><Button className="btn btn-success" onClick={() => setIsOpen(true)}>Actualizar</Button></td>
-                        <td><Button className="btn btn-info" onClick={() => setOpen(true)}>Ver</Button></td>
-                        <td><Button className="btn btn-danger" onClick={() => props.handleDeleteTableRows(index)}>X</Button></td>
-                    </tr>)
-                })
-            }
-            </tbody>
-        </Table>
-        
-        
-        {isOpen && <ModalUpdate setIsOpen={setIsOpen} />}
-        {open && <ModalView setIsOpen={setOpen} />}
-        
+  //Get all items from DB
+  const handleGetItems = () => {
+    fetch("https://localhost:7292/api/Inventory/GetAllItems", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((result) => setItems(result));
+  };
+  handleGetItems();
+  
 
-        
-        </>
-    )
-}
+  return (
+    <>
+      <Table>
+        <thead>
+          <tr>
+            <th className="text-primary">Nombre</th>
+            <th>Descripcion</th>
+            <th>Cantidad</th>
+            <th>User ID</th>
+          </tr>
+        </thead>
+        <tbody>
+          {items.map((item) => {
+            return (
+              <tr>
+                <td>{item.name}</td>
+                <td>{item.description}</td>
+                <td>{item.quantity}</td>
+                <td>{item.userId}</td>
+                <td>
+                  <button
+                    className="btn btn-primary" 
+                    onClick={() => setIsOpen(true)}
+                  >
+                    Actualizar
+                  </button>{" "}
+                  {"   "}
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => setOpen(true)} 
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </Table>
+
+      {isOpen && <ModalUpdate setIsOpen={setIsOpen} />}
+      {open && <ModalView setIsOpen={setOpen} />}
+    </>
+  );
+};
 
 export default ItemList;

@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import "./App.css";
-import AddUser from "./components/AddUser";
 //import Button from "react-bootstrap/Button";
 import UserList from "./components/UserList";
 import ItemList from "./components/ItemList";
@@ -9,26 +8,11 @@ import Layout from "./components/Layout";
 
 
 function App() {
-  const [usersList, setUsersList] = useState([]);
-
-  const addUserHandler = (uName, uEmail, uPhone) => {
-    setUsersList((prevUsersList) => {
-      return [
-        ...prevUsersList,
-        {
-          name: uName,
-          email: uEmail,
-          phone: uPhone,
-          id: Math.random().toString(),
-        },
-      ];
-    });
-  };
-  const handleDeleteTableRows = (index) => {
-    const rows = [...usersList];
-    rows.splice(index, 1);
-    setUsersList(rows);
-  };
+  // const handleDeleteTableRows = (index) => {
+  //   const rows = [...usersList];
+  //   rows.splice(index, 1);
+  //   setUsersList(rows);
+  // };
 
   return (
     <>
@@ -36,9 +20,9 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<AddUser onAddUser={addUserHandler} />} />
-          <Route path="usuarios" element={<UserList users={usersList} handleDeleteTableRows={handleDeleteTableRows}/>} />
-          <Route path="items" element={<ItemList users={usersList} handleDeleteTableRows={handleDeleteTableRows}/>} />
+          {/* <Route path="adduser" element={<AddUser/> } /> */}
+          <Route path="usuarios" element={<UserList/>} />
+          <Route path="items" element={<ItemList/>} />
         </Route>
       </Routes>
     </BrowserRouter>
