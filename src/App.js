@@ -8,11 +8,7 @@ import Layout from "./components/Layout";
 
 
 function App() {
-  // const handleDeleteTableRows = (index) => {
-  //   const rows = [...usersList];
-  //   rows.splice(index, 1);
-  //   setUsersList(rows);
-  // };
+  
 
   return (
     <>

@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./Modal.module.css";
-import AddUser from "../AddUser";
+import UpdateUser from "../UpdateUser";
 
-const ModalUpdate = ({ setIsOpen }) => {
+const ModalUpdate = ({ setIsOpen, handleUpdateUser }) => {
   return (
     <>
       <div className={styles.darkBG} onClick={() => setIsOpen(false)} />
@@ -12,7 +12,7 @@ const ModalUpdate = ({ setIsOpen }) => {
             <h5 className={styles.heading}>Update user</h5>
           </div>
           <div className={styles.modalContent}>
-            <AddUser/>
+            <UpdateUser handleUpdateUser={handleUpdateUser}/>
           </div>
           <div className={styles.modalActions}>
             <div className={styles.actionsContainer}>

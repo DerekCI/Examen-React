@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState, useEffect} from "react";
 import Table from "react-bootstrap/Table";
 import ModalUpdate from "./UI/ModalUpdate";
 import ModalView from "./UI/ModalView";
@@ -20,7 +20,9 @@ const ItemList = (props) => {
       .then((response) => response.json())
       .then((result) => setItems(result));
   };
-  handleGetItems();
+  useEffect(() => {
+    handleGetItems();
+  }, [])
   
 
   return (
@@ -35,9 +37,9 @@ const ItemList = (props) => {
           </tr>
         </thead>
         <tbody>
-          {items.map((item) => {
+          {items.map((item, index) => {
             return (
-              <tr>
+              <tr key={index}>
                 <td>{item.name}</td>
                 <td>{item.description}</td>
                 <td>{item.quantity}</td>

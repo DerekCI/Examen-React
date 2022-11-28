@@ -4,14 +4,14 @@ import Form from "react-bootstrap/Form";
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Container from "react-bootstrap/Container";
 
-const AddUser = (props) => {
+const UpdateUser = (props) => {
   const idInputRef = useRef();
   const nameInputRef = useRef();
   const typeInputRef = useRef();
   const emailInputRef = useRef();
   const phoneInputRef = useRef();
 
-  const addUserHandler = (event) => {
+  const updateUserHandler = (event) => {
     event.preventDefault();
     const enteredId = parseInt(idInputRef.current.value);
     const enteredName = nameInputRef.current.value;
@@ -19,7 +19,7 @@ const AddUser = (props) => {
     const enteredEmail = emailInputRef.current.value;
     const enteredPhone = phoneInputRef.current.value;
 
-    props.handleAddUser(
+    props.handleUpdateUser(
       enteredId,
       enteredName,
       enteredType,
@@ -38,13 +38,16 @@ const AddUser = (props) => {
       <Container>
         <Form>
           <Form.Group controlId="form.Id">
-            <Form.Label>ID usuario</Form.Label>
+            <Form.Label>ID del usuario a Actualizar</Form.Label>
             <Form.Control
               type="number"
               ref={idInputRef}
               placeholder="ID del usuario"
             />
           </Form.Group>
+          <p></p>
+          <p></p>
+          <p></p>
           <Form.Group controlId="form.Name">
             <Form.Label>Nombre</Form.Label>
             <Form.Control
@@ -81,11 +84,11 @@ const AddUser = (props) => {
             />
           </Form.Group>
           <p></p>
-          <Button onClick={addUserHandler}>Agregar usuario</Button>
+          <Button onClick={updateUserHandler}>Actualizar usuario</Button>
         </Form>
       </Container>
     </>
   );
 };
 
-export default AddUser;
+export default UpdateUser;

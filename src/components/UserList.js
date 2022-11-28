@@ -27,6 +27,24 @@ const UserList = (props) => {
     handleGetUsers();
   }, [])
 
+  const handleUpdateUser = async (uId, uName, uType, uEmail, uPhone) =>{
+    let userUpdated = {
+      user: uId,  
+      name: uName,
+      userType: uType,
+      email: uEmail,
+      phone: uPhone
+    }
+    await fetch('https://localhost:7292/api/User/UpdateUser?id='+ uId, {
+        method: 'PUT',
+        headers:{
+            'Conent-Type': 'application/json'
+        },
+        body: JSON.stringify(userUpdated)
+    });
+    handleGetUsers();
+  }
+
   const handleAddUser = async (uId, uName, uType, uEmail, uPhone) => {
     let newUser = {
       userId: uId,
@@ -45,6 +63,17 @@ const UserList = (props) => {
     });
     handleGetUsers();
   }
+
+  const handleDeleteUser = async (index) => {
+    
+    await fetch('https://localhost:7292/api/User/DeleteUser?id='+ index, {
+      method: 'DELETE',  
+      headers: {
+        'Content-Type': 'application/json'
+      },   
+    });
+    handleGetUsers();
+  };
   
 
   return (
@@ -87,6 +116,7 @@ const UserList = (props) => {
                 </td>
                 <td><button
                     className="btn btn-danger"
+                    onClick={() => handleDeleteUser(parseInt(user.userId))}
                   >
                     X
                   </button></td>
@@ -96,7 +126,7 @@ const UserList = (props) => {
         </tbody>
       </Table>
 
-      {isOpen && <ModalUpdate setIsOpen={setIsOpen} />}
+      {isOpen && <ModalUpdate setIsOpen={setIsOpen} handleUpdateUser={handleUpdateUser}/>}
       {open && <ModalView setIsOpen={setOpen}/>}
     </>
   );
