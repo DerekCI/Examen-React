@@ -7,7 +7,7 @@ const ModalView = ({ setIsOpen}) => {
       <div className={styles.centered}>
         <div className={styles.modal}>
           <div className={styles.modalHeader}>
-            <h5 className={styles.heading}>View House</h5>
+            <h5 className={styles.heading}>View User</h5>
           </div>
           <button className={styles.closeBtn} onClick={() => setIsOpen(false)}>
             X

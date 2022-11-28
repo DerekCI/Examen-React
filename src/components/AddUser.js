@@ -37,6 +37,7 @@ const AddUser = (props) => {
                   <Form.Label>Telefono</Form.Label>
                   <Form.Control type="text" ref={phoneInputRef} placeholder="Ingresa un numero de telefono"/>
                 </Form.Group>
+                <p></p>
                 <Button type="submit">Agregar usuario</Button>
               </Form>
             </Container>
