@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Table from "react-bootstrap/Table";
 import AddItem from "./AddItem";
 import ModalUpdate from "./UI/ModalUpdate";
@@ -23,41 +23,45 @@ const ItemList = (props) => {
   };
   useEffect(() => {
     handleGetItems();
-  }, [])
+  }, []);
 
-  const handleAddItem = async (uId, uName, uDescription, uQuantity, uUserid) => {
+  const handleAddItem = async (
+    uId,
+    uName,
+    uDescription,
+    uQuantity,
+    uUserid
+  ) => {
     let newItem = {
       itemId: uId,
       name: uName,
       description: uDescription,
       quantity: uQuantity,
-      userId: uUserid
-    }
-    await fetch('https://localhost:7292/api/Inventory/AddItem', {
-      method: 'POST', // *GET, POST, PUT, DELETE, etc.
+      userId: uUserid,
+    };
+    await fetch("https://localhost:7292/api/Inventory/AddItem", {
+      method: "POST", // *GET, POST, PUT, DELETE, etc.
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: JSON.stringify(newItem) // body data type must match "Content-Type" header
-    });
-    handleGetItems();
-  }
-  const handleDeleteItem = async (index) => {
-    
-    await fetch('https://localhost:7292/api/Inventory/DeleteItem?id='+ index, {
-      method: 'DELETE',  
-      headers: {
-        'Content-Type': 'application/json'
-      },   
+      body: JSON.stringify(newItem), // body data type must match "Content-Type" header
     });
     handleGetItems();
   };
-  
+  const handleDeleteItem = async (index) => {
+    await fetch("https://localhost:7292/api/Inventory/DeleteItem?id=" + index, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    handleGetItems();
+  };
 
   return (
     <>
-      <AddItem handleAddItem={handleAddItem}/>
+      <AddItem handleAddItem={handleAddItem} />
       <Table>
         <thead>
           <tr>
@@ -66,6 +70,8 @@ const ItemList = (props) => {
             <th>Descripcion</th>
             <th>Cantidad</th>
             <th>User ID</th>
+            <th>Accion</th>
+            <th>Borrar</th>
           </tr>
         </thead>
         <tbody>
@@ -79,12 +85,15 @@ const ItemList = (props) => {
                 <td>{item.userId}</td>
                 <td>
                   <button
-                    className="btn btn-primary" 
+                    className="btn btn-primary"
                     onClick={() => setIsOpen(true)}
                   >
                     Actualizar
                   </button>{" "}
                   {"   "}
+                  <button className="btn btn-info">Intercambiar</button>
+                </td>
+                <td>
                   <button
                     className="btn btn-danger"
                     onClick={() => handleDeleteItem(parseInt(item.itemId))}
