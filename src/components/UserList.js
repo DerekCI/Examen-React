@@ -9,6 +9,14 @@ const UserList = (props) => {
   const [open, setOpen] = useState(false);
 
   const [users, setUsers] = useState([]);
+
+  const [user,setUser] = useState({
+    userId: 0,
+    userName: "",
+    userType: 0,
+    email: "",
+    phone: ""
+  });
   
 
   //Get all users from DB
@@ -27,20 +35,14 @@ const UserList = (props) => {
     handleGetUsers();
   }, [])
 
-  const handleUpdateUser = async (uId, uName, uType, uEmail, uPhone) =>{
-    let userUpdated = {
-      user: uId,  
-      name: uName,
-      userType: uType,
-      email: uEmail,
-      phone: uPhone
-    }
-    await fetch('https://localhost:7292/api/User/UpdateUser?id='+ uId, {
+  const handleUpdateUser = async () =>{
+    
+    await fetch('https://localhost:7292/api/User/UpdateUser', {
         method: 'PUT',
         headers:{
             'Conent-Type': 'application/json'
         },
-        body: JSON.stringify(userUpdated)
+        body: JSON.stringify(user)
     });
     handleGetUsers();
   }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Table from "react-bootstrap/Table";
 import AddItem from "./AddItem";
-import ModalUpdate from "./UI/ModalUpdate";
+import ModalUpdateItem from "./UI/ModalUpdateItem";
 import ModalView from "./UI/ModalView";
 
 const ItemList = (props) => {
@@ -107,7 +107,7 @@ const ItemList = (props) => {
         </tbody>
       </Table>
 
-      {isOpen && <ModalUpdate setIsOpen={setIsOpen} />}
+      {isOpen && <ModalUpdateItem setIsOpen={setIsOpen} />}
       {open && <ModalView setIsOpen={setOpen} />}
     </>
   );
