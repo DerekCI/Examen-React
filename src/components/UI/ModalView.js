@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Modal.module.css";
 
 import Table from "react-bootstrap/Table";
@@ -8,7 +8,7 @@ const ModalView = ({ setIsOpen }) => {
   
 
   //get items
-  const handleGetItems = (userId) => {
+  const handleGetItems = () => {
     fetch('https://localhost:7292/api/Inventory/GetByUser?userId=1', {
       method: "GET",
       headers: {
@@ -18,8 +18,9 @@ const ModalView = ({ setIsOpen }) => {
       .then((response) => response.json())
       .then((result) => setItems(result));
   };
-
-  handleGetItems()
+  useEffect(() => {
+    handleGetItems();
+  });
   return (
     <>
       <div className={styles.darkBG} onClick={() => setIsOpen(false)} />

@@ -83,6 +83,7 @@ const UserList = (props) => {
       <Table>
         <thead>
           <tr>
+            <th>ID</th>
             <th className="text-primary">Nombre</th>
             <th>Tipo de usuario</th>
             <th>Correo</th>
@@ -95,6 +96,7 @@ const UserList = (props) => {
           {users.map((user, index) => {
             return (
               <tr key={index}>
+                <td>{user.userId}</td>
                 <td>{user.name}</td>
                 <td>{user.userType}</td>
                 <td>{user.email}</td>
@@ -113,6 +115,7 @@ const UserList = (props) => {
                   >
                     Ver items
                   </button>
+                  {open && <ModalView setIsOpen={setOpen} user={parseInt(user.userId)}/>}
                 </td>
                 <td><button
                     className="btn btn-danger"
